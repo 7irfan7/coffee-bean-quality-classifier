@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Pengguna</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profil.css') }}">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= Sidebar ================= -->
+
+    <div class="sidebar">
+        <h2>Coffee Vision</h2>
+        <a href="/">Home</a>
+        <a href="/profil" class="active">Profil</a>
+        <a href="/klasifikasi">Klasifikasi</a>
+        <a href="/about">About</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- ================= Content ================= -->
+
+    <div class="main">
+        <h1 class="title">
+            Profil Pengguna
+        </h1>
+
+        <!-- ================= Card Profil ================= -->
+
+        <div class="profile-card">
+            <!-- Foto -->
+            <div class="profile-left">
+                {% if user[4] %}
+                <img src="{{ url_for('static', filename='profil/' + user[4]) }}"
+                     class="profile-photo">
+                {% else %}
+                <img src="{{ url_for('static', filename='profil/default.png') }}"
+                     class="profile-photo">
+                {% endif %}
+                <form action="/upload_foto"
+                      method="POST"
+                      enctype="multipart/form-data">
+                    <input type="file"
+                           name="foto"
+                           id="foto"
+                           hidden
+                           onchange="this.form.submit()">
+                    <label for="foto" class="btn-upload">Ganti Foto</label>
+                </form>
+            </div>
+
+            <!-- Data Profil -->
+            <div class="profile-right">
+                <form action="/edit_profil"
+                      method="POST">
+                    <label>Nama</label>
+                    <input
+                        type="text"
+                        name="nama"
+                        value="{{ user[0] }}"
+                        id="nama"
+                        readonly
+                    >
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        value="{{ user[1] }}"
+                        readonly
+                    >
+                    <label>Umur</label>
+                    <input
+                        type="number"
+                        name="umur"
+                        value="{{ user[2] }}"
+                        id="umur"
+                        readonly
+                    >
+                    <label>Pekerjaan</label>
+                    <input
+                        type="text"
+                        name="pekerjaan"
+                        value="{{ user[3] }}"
+                        id="pekerjaan"
+                        readonly
+                    >
+                    <div class="button-group">
+                        <button
+                            type="button"
+                            class="btn-edit"
+                            onclick="editProfil()">Edit Profil</button>
+                        <button
+                            type="submit"
+                            class="btn-save"
+                            id="btnSave"
+                            style="display:none;">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= History ================= -->
+
+        <h2 class="history-title">
+            Riwayat Klasifikasi
+        </h2>
+        <div class="history-container">
+            {% if history %}
+                {% for item in history %}
+                <div class="history-card">
+                    <img src="/{{ item[1] }}"
+                         class="history-img">
+                    <h3>{{ item[2] }}</h3>
+                    <p>
+                        {{ item[12] }}
+                    </p>
+                    <button
+                        class="btn-detail"
+                        onclick="showDetail(
+                        '{{ item[1] }}',
+                        '{{ item[2] }}',
+                        '{{ item[3] }}',
+                        '{{ item[4] }}',
+                        '{{ item[5] }}',
+                        '{{ item[6] }}',
+                        '{{ item[7] }}',
+                        '{{ item[8] }}',
+                        '{{ item[9] }}',
+                        '{{ item[10] }}',
+                        '{{ item[11] }}'
+                        )">
+                        Detail
+                    </button>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-history">
+                    Belum ada riwayat klasifikasi.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- ================= Modal ================= -->
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <span class="close"
+              onclick="closeModal()">
+            &times;
+        </span>
+        <h2>Hasil Klasifikasi</h2>
+        <img id="modalGambar"
+             class="modal-img">
+        <h3 id="modalHasil"></h3>
+        <hr>
+        <h4>RGB</h4>
+        <p id="modalRGB"></p>
+        <hr>
+        <h4>GLCM</h4>
+        <p id="modalGLCM"></p>
+    </div>
+</div>
+<script>
+function editProfil(){
+    document.getElementById("nama").readOnly=false;
+    document.getElementById("umur").readOnly=false;
+    document.getElementById("pekerjaan").readOnly=false;
+    document.getElementById("btnSave").style.display="inline-block";
+}
+function showDetail(
+gambar,
+hasil,
+r,
+g,
+b,
+contrast,
+energy,
+homogeneity,
+dissimilarity,
+correlation,
+asm
+){
+    document.getElementById("detailModal").style.display="block";
+    gambar = gambar.replace(/\\/g, "/");
+    document.getElementById("modalGambar").src="/"+gambar;
+    document.getElementById("modalHasil").innerHTML=hasil;
+    document.getElementById("modalRGB").innerHTML=
+        "R : "+parseFloat(r).toFixed(2)+"<br>"+
+        "G : "+parseFloat(g).toFixed(2)+"<br>"+
+        "B : "+parseFloat(b).toFixed(2);
+    document.getElementById("modalGLCM").innerHTML=
+        "Contrast : "+parseFloat(contrast).toFixed(4)+"<br>"+
+        "Energy : "+parseFloat(energy).toFixed(4)+"<br>"+
+        "Homogeneity : "+parseFloat(homogeneity).toFixed(4)+"<br>"+
+        "Dissimilarity : "+parseFloat(dissimilarity).toFixed(4)+"<br>"+
+        "Correlation : "+parseFloat(correlation).toFixed(4)+"<br>"+
+        "ASM : "+parseFloat(asm).toFixed(4);
+}
+function closeModal(){
+    document.getElementById("detailModal").style.display="none";
+}
+window.onclick=function(event){
+    let modal=document.getElementById("detailModal");
+    if(event.target==modal){
+        modal.style.display="none";
+    }
+}
+</script>
+</body>
+</html>

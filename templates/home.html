@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Coffe Vision</title>
+
+        <link rel="stylesheet"  href="{{ url_for('static', filename='css/home.css') }}">
+
+    </head>
+    <body>
+        <nav class="navbar">
+        
+            <div class="logo">Coffe Vision</div>
+
+            <div class="menu">
+                <a href="/profil">Profil</a>
+                <a href="/klasifikasi">Klasifikasi</a>
+                <a href="/about">About</a>
+            </div>
+            <div class="nav-button">
+                {% if user_login %}
+                <a href="/profil" class="profile-user">
+                    {% if session['foto_profil'] != 'default.png' %}
+
+                        <img
+                            src="{{ url_for('static',
+                            filename='profil/' +
+                            session.get('foto_profil', 'default.png')) }}"
+                            class="profile-img">
+                    {% endif %}
+                        <span>{{ session['nama'] }}</span>
+                </a>
+                <a href="/logout" class="logout-btn">
+                    Logout
+                </a>
+                {% else %}
+                <button onclick="window.location.href='/login'">LOGIN</button>
+                <button onclick="window.location.href='/registrasi'">REGISTER</button>
+                {% endif %}
+            </div>
+        </nav>
+
+        <section class="hero">
+            <span class="welcome">WELCOME</span>
+            <h1>KLASIFIKASI BIJI KOPI</h1>
+            <p>
+                Aplikasi ini membantu mengindentifikasi kualitas biji kopi secara otomatis menggunakan analisis citra digital. dengan memanfaatkan metode Support Vector Machine (SVM), sistem mampu mengenali perbedaan warna dan tekstur untuk menentukan mutu biji kopi secara cepat dan akurat.
+            </p>
+            <a href="/klasifikasi" class="btn-primary">
+                MULAI KLASIFIKASI
+            </a>
+            
+        </section>
+    </body>
+</html>

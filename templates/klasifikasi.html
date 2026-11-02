@@ -1,0 +1,151 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Klasifikasi</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/klasifikasi.css') }}">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <div class="sidebar">
+            <h2>Computer Vision</h2>
+            <a href="/">Home</a>
+            <a href="/profil">Profil</a>
+            <a href="/klasifikasi" class="active">Klasifikasi</a>
+            <a href="/about">About</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <div class="main">
+
+            <div class="card">
+
+                <h1>KLASIFIKASI BIJI KOPI</h1>
+
+                <p>Silahkan upload gambar biji kopi...</p>
+
+                <form method="POST" enctype="multipart/form-data">
+
+                    <label class="upload-box">
+
+                        <input
+                            type="file"
+                            name="gambar"
+                            id="gambar"
+                            accept="image/*"
+                            onchange="previewImage(event)"
+                            hidden>
+                            
+                        <img
+                            id="preview"
+                            src=""
+                            alt="Preview Gambar"
+                            style="display: none;">
+                        <span id="uploadText">
+                            + Tambahkan Gambar
+                        </span>
+
+                    </label>
+
+                    <button class="btn" type="submit">Proses Klasifikasi</button>
+
+                </form>
+
+            </div>
+
+            {% if hasil %}
+
+<div class="result">
+
+    <h2>HASIL KLASIFIKASI</h2>
+
+    <div class="hasil-container">
+
+        <!-- Gambar -->
+        <div class="fitur-card">
+
+            <h3>Gambar Uji</h3>
+
+            <img
+                src="/{{ gambar }}"
+                class="hasil-img"
+                alt="Gambar Kopi">
+
+        </div>
+
+        <!-- Prediksi -->
+        <div class="fitur-card">
+
+            <h3>Prediksi</h3>
+
+            <div class="status">
+
+                {{ hasil }}
+
+            </div>
+
+        </div>
+
+        <!-- RGB & GLCM -->
+        <div class="fitur-card">
+
+            <h3>Fitur RGB & GLCM</h3>
+
+            <h4>RGB</h4>
+
+            <p>R : {{ rgb.r }}</p>
+            <p>G : {{ rgb.g }}</p>
+            <p>B : {{ rgb.b }}</p>
+
+            <hr>
+
+            <h4>GLCM</h4>
+
+            <p>Contrast : {{ glcm_data.contrast }}</p>
+            <p>Energy : {{ glcm_data.energy }}</p>
+            <p>Homogeneity : {{ glcm_data.homogeneity }}</p>
+            <p>Dissimilarity : {{ glcm_data.dissimilarity }}</p>
+            <p>Correlation : {{ glcm_data.correlation }}</p>
+            <p>ASM : {{ glcm_data.asm }}</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function previewImage(event){
+
+            const preview =
+                document.getElementById('preview');
+
+            const uploadText =
+                document.getElementById('uploadText');
+
+            preview.src =
+                URL.createObjectURL(
+                    event.target.files[0]
+                );
+
+            preview.style.display = "block";
+            uploadText.style.display = "none"
+        }
+
+    </script>
+
+</body>
+</html>
