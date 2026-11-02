@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Coffee Vision</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Coffee Vision
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/profil">Profil</a>
+        <a href="/klasifikasi">Klasifikasi</a>
+        <a href="/about" class="active">About</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>About</h1>
+
+    <p>Tentang aplikasi klasifikasi biji kopi</p>
+
+</section>
+
+
+<!-- ================= ABOUT CARD ================= -->
+
+<section class="about-section">
+
+    <div class="about-card">
+
+        <!-- FOTO -->
+
+        <div class="about-left">
+
+            <div class="foto-box">
+
+                <!-- Nanti tinggal ganti fotonya -->
+                <img src="{{ url_for('static', filename='OIP.jpg') }}"
+                     alt="Foto"
+                     class="foto">
+
+            </div>
+
+        </div>
+
+
+        <!-- DESKRIPSI -->
+
+        <div class="about-right">
+
+            <h2>Tentang Aplikasi</h2>
+
+            <p>
+                Coffee Vision merupakan aplikasi berbasis web yang dirancang
+                untuk membantu proses klasifikasi mutu biji kopi secara otomatis
+                menggunakan metode Support Vector Machine (SVM). Sistem
+                memanfaatkan ekstraksi fitur warna RGB dan Gray Level
+                Co-occurrence Matrix (GLCM) sebagai dasar dalam menentukan
+                kualitas biji kopi.
+            </p>
+
+            <h2>Tujuan</h2>
+
+            <p>
+                Tujuan dari aplikasi ini adalah membantu pengguna dalam
+                melakukan klasifikasi mutu biji kopi secara cepat,
+                objektif, dan mudah melalui pemanfaatan teknologi
+                pengolahan citra digital.
+            </p>
+
+        </div>
+
+
+        <!-- FOOTER CARD -->
+
+        <div class="about-footer">
+
+            <div class="footer-item">
+
+                <h3>Dikembangkan Oleh</h3>
+
+                <p>Irfan Metovani</p>
+
+            </div>
+
+            <div class="footer-item">
+
+                <h3>Program Studi</h3>
+
+                <p>Teknik Informatika</p>
+
+                <p>Universitas Putra Indonesia YPTK Padang</p>
+
+            </div>
+
+            <div class="footer-item">
+
+                <h3>Judul Penelitian</h3>
+
+                <p>
+                    Klasifikasi Mutu Biji Kopi Berdasarkan Analisis Citra Digital Menggunakan metode Support Vector Machine
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
