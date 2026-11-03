@@ -1,0 +1,197 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #f4f6f9;
+    }
+    
+    .layout {
+    display: flex;
+    min-height: 100vh;
+    }
+    .sidebar {
+    width: 220px;
+    background: #184c99;
+    color: white;
+    padding: 30px 20px;
+    }
+    
+    .sidebar h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    }
+    
+    .sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+    }
+    
+    .sidebar a:hover,
+    .sidebar a.active {
+    background: rgba(255,255,255,0.2);
+    }
+    
+    .main {
+    flex: 1;
+    padding: 30px;
+    }
+    
+    .card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .card h1 {
+    color: #1a1a1a;
+    }
+    
+    .card p {
+    color: #666;
+    }
+    
+    .upload-box {
+    background: #184c99;
+    color: white;
+    height: 250px;
+    border-radius: 15px;
+    margin: 20px 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    }
+    
+    .upload-box:hover {
+    background: #0f3570;
+    }
+    
+    .upload-box input {
+    display: none;
+    }
+    
+    #preview {
+    max-width: 180px;
+    max-height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    }
+    
+    #uploadText {
+    font-size: 20px;
+    font-weight: 600;
+    }
+    
+    .btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 20px;
+    background: #184c99;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.3s;
+    }
+    
+    .btn:hover {
+    background: #0f3570;
+    }
+    
+    .result{
+    max-width:1100px;
+    margin:35px auto;
+    background:#ffffff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+    }
+    
+    .result h2{
+    text-align:center;
+    color:#184c99;
+    margin-bottom:30px;
+    font-size:28px;
+    }
+    
+    .hasil-container{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    align-items:stretch;
+    }
+    
+    .fitur-card{
+    background:#f7f9fc;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+    
+    .fitur-card:nth-child(1){
+    width:250px;
+    }
+    
+    .fitur-card:nth-child(2){
+    width:180px;
+    }
+    
+    .fitur-card:nth-child(3){
+    flex:1;
+    }
+    
+    .fitur-card h3{
+    text-align:center;
+    color:#184c99;
+    margin-bottom:20px;
+    font-size:20px;
+    }
+    
+    .fitur-card h4{
+    color:#184c99;
+    margin-top:15px;
+    margin-bottom:8px;
+    font-size:17px;
+    }
+    
+    .fitur-card p{
+    margin:6px 0;
+    font-size:14px;
+    color:#333;
+    }
+    
+    .hasil-img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    display:block;
+    margin:auto;
+    border-radius:12px;
+    }
+    
+    .status{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:200px;
+    font-size:24px;
+    font-weight:bold;
+    color:#184c99;
+    }
+    
+    hr{
+    border:none;
+    border-top:1px solid #ddd;
+    margin:15px 0;
+    }
